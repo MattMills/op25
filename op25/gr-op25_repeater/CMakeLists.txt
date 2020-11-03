@@ -92,11 +92,12 @@ find_package(CppUnit)
 #
 set(GR_REQUIRED_COMPONENTS RUNTIME BLOCKS FILTER PMT)
 # find_package(Gnuradio "version")
-find_package(Gnuradio)
-
-if(NOT GNURADIO_RUNTIME_FOUND)
-    message(FATAL_ERROR "GnuRadio Runtime required to compile op25_repeater")
+set(MIN_GR_VERSION "3.8.0")
+find_package(Gnuradio REQUIRED)
+if("${Gnuradio_VERSION}" VERSION_LESS MIN_GR_VERSION)
+    MESSAGE(FATAL_ERROR "GnuRadio version required: >=\"" ${MIN_GR_VERSION} "\" found: \"" ${Gnuradio_VERSION} "\"")
 endif()
+
 if(NOT CPPUNIT_FOUND)
     message(FATAL_ERROR "CppUnit required to compile op25_repeater")
 endif()
