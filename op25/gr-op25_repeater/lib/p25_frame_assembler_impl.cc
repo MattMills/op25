@@ -104,6 +104,11 @@ static const int MAX_IN = 1;	// maximum number of input streams
 	d_nac(0)
 {
         fprintf(stderr, "p25_frame_assembler_impl: do_imbe[%d], do_output[%d], do_audio_output[%d], do_phase2_tdma[%d]\n", do_imbe, do_output, do_audio_output, do_phase2_tdma);
+
+        if (d_do_audio_output)
+                set_output_multiple(864);
+        if (!d_do_audio_output && !d_do_imbe)
+                set_output_multiple(160);
 }
 
 void
